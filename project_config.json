@@ -1,0 +1,358 @@
+{
+  "slug": "subtitle-generator",
+  "name": "Subtitle Generator",
+  "domain": "Media / Subtitles",
+  "target_user": "Domain operator, business owner, analyst, or team member who needs this workflow executed reliably.",
+  "core_job": "Media → subtitles with speakers/translations",
+  "deep_features": [
+    "timeline editor",
+    "speaker labels",
+    "translation",
+    "glossary",
+    "reading-speed QC",
+    "burn-in instructions",
+    "multi-format export"
+  ],
+  "input_schema": [
+    {
+      "key": "media",
+      "label": "Media",
+      "type": "text",
+      "required": true,
+      "help": "Affects input: Media.",
+      "affects": [
+        "prompt",
+        "workflow"
+      ],
+      "default": ""
+    },
+    {
+      "key": "work_brief",
+      "label": "Work brief / source text / URL / instructions",
+      "type": "textarea",
+      "required": true,
+      "default": "",
+      "help": "Paste the material, URL, description, or instruction needed for this project.",
+      "affects": [
+        "prompt",
+        "workflow"
+      ]
+    }
+  ],
+  "customization_schema": [
+    {
+      "key": "execution_mode",
+      "label": "Execution mode",
+      "type": "select",
+      "required": false,
+      "options": [
+        "Draft",
+        "Production",
+        "Audit / strict review",
+        "JSON/API output"
+      ],
+      "default": "Production",
+      "help": "Controls strictness, depth, and output format for this project workflow.",
+      "affects": [
+        "workflow",
+        "validation",
+        "export"
+      ]
+    },
+    {
+      "key": "source_target_language",
+      "label": "source/target language",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: source/target language.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "English",
+        "Arabic",
+        "Egyptian Arabic",
+        "French",
+        "German",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    {
+      "key": "max_chars_line",
+      "label": "max chars/line",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: max chars/line.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "cps_wpm",
+      "label": "CPS/WPM",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: CPS/WPM.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "speaker_labels",
+      "label": "speaker labels",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: speaker labels.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "glossary",
+      "label": "glossary",
+      "type": "text",
+      "required": false,
+      "help": "Affects customization: glossary.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "subtitle_format",
+      "label": "subtitle format",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: subtitle format.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "default": ""
+    },
+    {
+      "key": "output_format",
+      "label": "output format",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: output format.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "Markdown",
+        "JSON",
+        "CSV",
+        "PDF",
+        "DOCX",
+        "XLSX"
+      ],
+      "default": "Markdown"
+    },
+    {
+      "key": "language",
+      "label": "language",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: language.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "English",
+        "Arabic",
+        "Egyptian Arabic",
+        "French",
+        "German",
+        "Spanish"
+      ],
+      "default": "English"
+    },
+    {
+      "key": "privacy_mode",
+      "label": "privacy mode",
+      "type": "select",
+      "required": false,
+      "help": "Affects customization: privacy mode.",
+      "affects": [
+        "prompt",
+        "validation",
+        "workflow",
+        "export"
+      ],
+      "options": [
+        "cloud allowed",
+        "local only",
+        "redact sensitive data"
+      ],
+      "default": "cloud allowed"
+    },
+    {
+      "key": "confidence_threshold",
+      "label": "Confidence threshold",
+      "type": "slider",
+      "required": false,
+      "min": 0,
+      "max": 100,
+      "default": 75,
+      "help": "Items below this confidence are escalated to the human review queue.",
+      "affects": [
+        "validation",
+        "workflow",
+        "export"
+      ]
+    }
+  ],
+  "workflow_steps": [
+    "Media",
+    "subtitles with speakers/translations"
+  ],
+  "ui_panels": [
+    "media upload",
+    "subtitle timeline",
+    "speaker editor",
+    "QC warnings",
+    "export panel"
+  ],
+  "output_formats": [
+    "SRT/VTT/ASS",
+    "translated subtitles",
+    "transcript JSON"
+  ],
+  "integrations": [
+    "File upload",
+    "REST API",
+    "Export download",
+    "Job history",
+    "STT provider required for raw audio"
+  ],
+  "guardrails": [
+    "Show uncertainty and confidence",
+    "Cite evidence from input when possible",
+    "Human review required for legal, medical, financial, hiring, or security decisions",
+    "Do not invent facts absent from input"
+  ],
+  "recommended_models": {
+    "drafting": "fast cloud or local instruct model",
+    "reasoning": "strong reasoning model",
+    "private_documents": "local model via Ollama/LM Studio/vLLM",
+    "vision_or_pdf": "vision-capable model when image pages are used"
+  },
+  "suite": "Media Creator Suite",
+  "implementation_status": "real_local_engine_registered",
+  "analysis_modules": [
+    "subtitle_from_text",
+    "speaker_segment",
+    "reading_speed_check"
+  ],
+  "output_sections": [
+    "SRT/VTT draft",
+    "Speaker map",
+    "Timing warnings",
+    "Translation notes"
+  ],
+  "field_validations": [
+    {
+      "field": "source_target_language",
+      "rule": "Preserve requested language in final deliverable unless source text requires bilingual output."
+    },
+    {
+      "field": "language",
+      "rule": "Preserve requested language in final deliverable unless source text requires bilingual output."
+    }
+  ],
+  "scorecards": [
+    "Audience fit",
+    "Offer clarity",
+    "Platform fit",
+    "Compliance risk",
+    "Conversion readiness"
+  ],
+  "automation_hooks": [
+    {
+      "name": "save_job_snapshot",
+      "type": "internal",
+      "description": "Persist inputs, customization, uploads, output, and usage for audit/history."
+    },
+    {
+      "name": "export_pack",
+      "type": "internal",
+      "description": "Export Markdown, JSON, PDF, and DOCX from the completed job."
+    },
+    {
+      "name": "human_review_queue",
+      "type": "manual",
+      "description": "Flag low-confidence, legal/medical/finance/security/compliance-sensitive items for human review."
+    }
+  ],
+  "ux_profile": {
+    "name": "Creator Production Studio",
+    "accent": "#fb7185",
+    "layout": "Brief → script/asset plan → timeline → publishing package",
+    "hero": "Creator-oriented UX for briefs, thumbnails, transcripts, captions, storyboards, and publishing workflows.",
+    "components": [
+      "Creative brief canvas",
+      "Storyboard/timeline",
+      "Transcript or caption editor",
+      "Platform publish checklist",
+      "Asset quality scorecards"
+    ],
+    "metrics": [
+      "Hook strength",
+      "Retention risk",
+      "Production readiness",
+      "Publishing completeness"
+    ],
+    "quick_actions": [
+      "Build storyboard",
+      "Create caption package",
+      "Check hook/thumbnail",
+      "Prepare publishing checklist"
+    ],
+    "review_lanes": [
+      "Brief",
+      "Script",
+      "Produce",
+      "Package",
+      "Publish"
+    ],
+    "empty_state": "Add brief, media file, transcript, or thumbnail notes. Vision/audio work needs supported provider or local model.",
+    "icon": "🎬",
+    "project_slug": "subtitle-generator",
+    "domain": "Media / Subtitles"
+  },
+  "final_gui_status": {
+    "standalone_folder_gui": true,
+    "domain_specific_ux_profile": true,
+    "elegant_component_system": true,
+    "no_fake_live_data_policy": true,
+    "requires_real_connectors_for_external_actions": true
+  }
+}
