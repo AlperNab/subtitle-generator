@@ -1,0 +1,18 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "subtitle-generator"
+version = "0.1.0"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Alper Nabil Gabra Zakher", email = "contact@alpernabil.com" }]
+requires-python = ">=3.10"
+dependencies = ["anthropic>=0.25.0"]
+
+[project.urls]
+Homepage = "https://github.com/AlperNab/subtitle-generator"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
